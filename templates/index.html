@@ -1,0 +1,41 @@
+<<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>シフト生成</title>
+</head>
+<body>
+<form method="POST">
+<h2>全メンバー</h2>
+<input type="text" name="all_members"><br>
+<h2>後輩</h2>
+<input type="text" name="juniors"><br>
+<h2>バンドと出演者</h2>
+
+{% for i in range(6) %}
+<input type="text" name="band{{i}}" placeholder="バンド名">
+<input type="text" name="member{{i}}" placeholder="出演者"><br>
+
+{% endfor %}
+<br>
+<button type="submit">生成</button>
+</form>
+
+{% if result %}
+<h2>結果</h2>
+
+{% for r in result %}
+<div>{{ r[0] }}　{{ r[1] }} {{ r[2] }}</div>
+
+{% endfor %}
+
+{% endif %}
+
+{% if setting %}
+<h2>セッティング係</h2>
+<div>{{ setting | join("、") }}</div>
+
+{% endif %}
+</body>
+</html>
+ 
