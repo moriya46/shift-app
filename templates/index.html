@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>シフト生成</title>
+</head>
+<body>
+<form method="POST">
+<h2>全メンバー（カンマ区切り）</h2>
+<input type="text" name="all_members"><br>
+<h2>後輩（カンマ区切り）</h2>
+<input type="text" name="juniors"><br>
+<h2>バンドと出演者</h2>
+<div id="bands">
+
+  {% for i in range(6) %}
+<div>
+<input type="text" name="band{{i}}" placeholder="バンド名">
+<input type="text" name="member{{i}}" placeholder="出演者（カンマ区切り）">
+</div>
+
+  {% endfor %}
+</div>
+<button type="button" onclick="addBand()">＋追加</button>
+<br><br>
+<button type="submit">生成</button>
+</form>
+
+{% if result %}
+<h2>結果</h2>
+
+{% for r in result %}
+<div>
+<strong>{{ r[0] }}</strong>：{{ r[1] }} と {{ r[2] }}
+</div>
+
+{% endfor %}
+<h2>セッティング係</h2>
+<div>
+
+{% for s in setting %}
+
+{{ s }},
+
+{% endfor %}
+</div>
+
+{% endif %}
+<script>
+
+let count = 6;
+
+function addBand() {
+
+  const div = document.createElement("div");
+
+  div.innerHTML = `
+<input type="text" name="band${count}" placeholder="バンド名">
+<input type="text" name="member${count}" placeholder="出演者（カンマ区切り）">
+
+  `;
+
+  document.getElementById("bands").appendChild(div);
+
+  count++;
+
+}
+</script>
+</body>
+</html>
+ 
